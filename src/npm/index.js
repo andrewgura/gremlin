@@ -40,14 +40,14 @@ const PackageFinder = () => {
         throw new Error('Simulation of network error')
       }
 
-      setNpmResults(result);
-
       if(result.length === 0) {
         toast({
           description: "No packages were found with the input string.",
           ...errorToasterSettings,
         })
         setError(true) //Only set error true here for input styling
+      } else {
+        setNpmResults(result);
       }
 
     } catch (error) {
