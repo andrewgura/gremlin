@@ -30,6 +30,7 @@ const PackageFinder = () => {
 
   const fetchNpmResults = async (e) => {
     e.preventDefault()
+    if(!queryString) return
     setIsLoading(true);
 
     try {
