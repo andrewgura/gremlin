@@ -37,7 +37,7 @@ const PackageFinder = () => {
       const result = await response.json();
       
       if(testState === ViewStates.ERROR) {
-        throw new Error('Error simulation of network')
+        throw new Error('Simulation of network error')
       }
 
       setNpmResults(result);
