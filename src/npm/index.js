@@ -13,6 +13,7 @@ const PackageFinder = () => {
   const [npmResults, setNpmResults] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [filteredResults, setFilteredResults] = useState([])
 
 
   // Only for radio button click to manually see popup message for extra credit
@@ -66,6 +67,16 @@ const PackageFinder = () => {
     setError(null)
     setQueryString(e.target.value)
   }
+  
+  const handleFilter = v => {
+    const value = v.target.value
+     const filtered = npmResults.filter(i => {
+      if(i.package.keywords && i.package.keywords.length > 0) {
+        return i.package.keywords.includes(value)
+      }
+     })
+     setFilteredResults(filtered)
+  }
 
   return (
     <div>
@@ -84,9 +95,14 @@ const PackageFinder = () => {
         </Flex>
       </form>
 
+    {Boolean(npmResults.length) && <Input w="600px" placeholder='Filter by Tag' onChange={v => handleFilter(v)} />}
+
       <Flex wrap="wrap" gap={4} m="10px">
         {(isLoading || testState === ViewStates.LOADING) && <LoadingState />}
-        {(Boolean(npmResults.length) && testState === ViewStates.DEFAULT) && npmResults.map(i => <NpmPackage data={i} key={`render_${i.package.name}`} />)}
+
+      {(Boolean(filteredResults.length)) ? filteredResults.map(i => <NpmPackage data={i} key={`render_${i.package.name}`} />) : npmResults.map(i => <NpmPackage data={i} key={`render_${i.package.name}`} />)}
+
+        {/* {(Boolean(filteredResults.length) && testState === ViewStates.DEFAULT) && filteredResults.map(i => <NpmPackage data={i} key={`render_${i.package.name}`} />)} */}
       </Flex>
     </div>
   );
