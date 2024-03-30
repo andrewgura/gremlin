@@ -1,3 +1,5 @@
+To start, run `npm install` and then `npm start start`
+
 1. Project was created with create react app
 2. Used [ChakraUI](https://chakra-ui.com/) because I wanted to try it out since I've been hearing good things about it. Other than that, no additional packages used other than whats provided with CRA
 3. There wasn't a mention of TypeScript so figured it wasn't necessary
